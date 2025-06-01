@@ -21,3 +21,5 @@ UserSettings/
 *.ipa
 *.app
 .DS_Store
+.vs/
+
