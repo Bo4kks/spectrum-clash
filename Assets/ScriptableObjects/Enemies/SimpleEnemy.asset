@@ -12,3 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7801c33da7433d842b7e6a7e17929988, type: 3}
   m_Name: SimpleEnemy
   m_EditorClassIdentifier: 
+  _enemyPrefab: {fileID: 3833052659703029135, guid: f264983a10b419744b889b586f0634f9, type: 3}
+  _speed: 5
+  _color:
+    serializedVersion: 2
+    rgba: 4278190335
+  _damage: 15

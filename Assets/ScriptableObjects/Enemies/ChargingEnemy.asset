@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7801c33da7433d842b7e6a7e17929988, type: 3}
+  m_Name: ChargingEnemy
+  m_EditorClassIdentifier: 
+  _enemyPrefab: {fileID: 7877177411686705825, guid: f445c25db5425fb41814b748404496e9, type: 3}
+  _speed: 3
+  _color:
+    serializedVersion: 2
+    rgba: 4278254591
+  _damage: 20

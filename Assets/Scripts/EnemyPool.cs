@@ -68,7 +68,7 @@ public class EnemyPool : MonoBehaviour
         }
         else
         {
-            Destroy(enemyObj); // fallback
+            Destroy(enemyObj);
         }
     }
 

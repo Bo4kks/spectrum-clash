@@ -5,6 +5,7 @@ public abstract class Enemy : MonoBehaviour, IEnemy
     [SerializeField] private EnemyDataSO _enemyData;
     [SerializeField] protected float speed;
     [SerializeField] protected Color32 color;
+    [SerializeField] protected float damage;
     protected Transform target;
     protected SpriteRenderer spriteRenderer;
     protected EnemyPool pool;
@@ -19,9 +20,10 @@ public abstract class Enemy : MonoBehaviour, IEnemy
 
     public virtual void Initialize(EnemyDataSO data)
     {
-        target = FindFirstObjectByType<CharacterColorSwap>().transform;
+        target = FindFirstObjectByType<PlayerHealth>().transform;
         speed = data.Speed;
         color = data.Color;
+        damage = data.Damage;
 
         if (spriteRenderer != null)
         {
@@ -34,20 +36,21 @@ public abstract class Enemy : MonoBehaviour, IEnemy
         pool = enemyPool;
     }
 
-    protected virtual void Update()
+    protected virtual void FixedUpdate()
     {
         Move();
     }
 
     protected abstract void Move();
 
-    public void ReturnToPool()
+    public virtual void ReturnToPool()
     {
         pool.ReturnToPool(gameObject, _enemyData);
     }
 
     public virtual void OnHitPlayer()
     {
+        EventBus.Invoke(new OnEnemyHitPlayerEvent(damage));
         ReturnToPool();
     }
 }

@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
     {
         Transform spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
 
-        _enemyPool.SpawnEnemy(spawnPoint.position, _enemyData[0]); // test
+        _enemyPool.SpawnEnemy(spawnPoint.position, _enemyData[Random.Range(0, _enemyData.Count)]); // test
     }
 
 
