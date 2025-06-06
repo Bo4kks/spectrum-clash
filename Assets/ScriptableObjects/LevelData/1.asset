@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4800509c38ff8c4aaf07af673dbc9ed, type: 3}
+  m_Name: 1
+  m_EditorClassIdentifier: 
+  _levelIndex: 1
+  _levelDurationIsSeconds: 300
+  _timeIntervalToBufEnemies: 30
+  _enemyTypes:
+  - {fileID: 11400000, guid: 0aca687ede14d33499be2f157b907f3f, type: 2}
+  - {fileID: 11400000, guid: d51f86b67e6e0b5469e38f0bdb43e4eb, type: 2}

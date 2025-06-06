@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TapHandler : MonoBehaviour
+public class TapHandler : MonoBehaviour, IEventPusher
 {
     [SerializeField] private PolygonCollider2D _touchZone;
 
@@ -18,7 +18,7 @@ public class TapHandler : MonoBehaviour
 
                 if (_touchZone.OverlapPoint(touchPos2D))
                 {
-                    EventBus.Invoke(new TouchZonePressedEvent());
+                    EventBus.Invoke(new OnTouchZonePressedEvent());
                 }
             }
         }

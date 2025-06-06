@@ -1,11 +1,14 @@
+using System;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour, IEnemy
+public abstract class Enemy : MonoBehaviour, IEnemy, IEventPusher
 {
     [SerializeField] private EnemyDataSO _enemyData;
+    [SerializeField] private EnemiesDifficulty _enemiesDifficulty;
     [SerializeField] protected float speed;
-    [SerializeField] protected Color32 color;
     [SerializeField] protected float damage;
+    [SerializeField] protected Color32 color;
+
     protected Transform target;
     protected SpriteRenderer spriteRenderer;
     protected EnemyPool pool;
@@ -16,14 +19,15 @@ public abstract class Enemy : MonoBehaviour, IEnemy
     protected virtual void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        _enemiesDifficulty = FindFirstObjectByType<EnemiesDifficulty>();
     }
 
     public virtual void Initialize(EnemyDataSO data)
     {
         target = FindFirstObjectByType<PlayerHealth>().transform;
-        speed = data.Speed;
         color = data.Color;
-        damage = data.Damage;
+        speed = data.Speed * _enemiesDifficulty.SpeedMultiplier;
+        damage = data.Damage * _enemiesDifficulty.DamageMultiplier;
 
         if (spriteRenderer != null)
         {
@@ -53,4 +57,5 @@ public abstract class Enemy : MonoBehaviour, IEnemy
         EventBus.Invoke(new OnEnemyHitPlayerEvent(damage));
         ReturnToPool();
     }
+
 }

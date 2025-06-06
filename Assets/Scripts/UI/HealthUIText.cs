@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class HealthUIText : MonoBehaviour
+public class HealthUIText : MonoBehaviour, IEventListener
 {
     private TextMeshProUGUI _healthText;
 
@@ -11,12 +11,12 @@ public class HealthUIText : MonoBehaviour
         _healthText = GetComponent<TextMeshProUGUI>();
     }
 
-    private void OnEnable()
+    public void OnEnable()
     {
         EventBus.Subscribe<OnUIHPChanged>(ChangeHpValue);
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
         EventBus.Unsubscribe<OnUIHPChanged>(ChangeHpValue);
     }

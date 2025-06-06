@@ -1,9 +1,6 @@
-using System;
-using NUnit.Framework;
 using UnityEngine;
-using System.Collections.Generic;
 
-public class CharacterColorSwap : MonoBehaviour
+public class CharacterColorSwap : MonoBehaviour, IEventListener
 {
     private SpriteRenderer _spriteRenderer;
 
@@ -12,17 +9,17 @@ public class CharacterColorSwap : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void OnEnable()
+    public void OnEnable()
     {
-        EventBus.Subscribe<ColorSwapEvent>(OnColorChanged);
+        EventBus.Subscribe<OnColorSwapEvent>(OnColorChanged);
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
-        EventBus.Unsubscribe<ColorSwapEvent>(OnColorChanged);
+        EventBus.Unsubscribe<OnColorSwapEvent>(OnColorChanged);
     }
 
-    private void OnColorChanged(ColorSwapEvent ev)
+    private void OnColorChanged(OnColorSwapEvent ev)
     {
         _spriteRenderer.color = ev.NewColor;
     }

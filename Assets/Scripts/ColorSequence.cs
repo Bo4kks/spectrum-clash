@@ -2,21 +2,22 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorSequence : MonoBehaviour
+public class ColorSequence : MonoBehaviour, IEventListener, IEventPusher
 {
     [SerializeField] private List<Color32> _colorsSequence;
     [SerializeField] private int _currentColorIndex = 0;
 
-    private void Awake()
+    public void OnEnable()
     {
-        EventBus.Subscribe<TouchZonePressedEvent>(OnTouchZonePressed);
-    }
-    private void OnDestroy()
-    {
-        EventBus.Unsubscribe<TouchZonePressedEvent>(OnTouchZonePressed);
+        EventBus.Subscribe<OnTouchZonePressedEvent>(OnTouchZonePressed);
     }
 
-    private void OnTouchZonePressed(TouchZonePressedEvent @event)
+    public void OnDisable()
+    {
+        EventBus.Unsubscribe<OnTouchZonePressedEvent>(OnTouchZonePressed);
+    }
+
+    private void OnTouchZonePressed(OnTouchZonePressedEvent @event)
     {
         _currentColorIndex++;
 
@@ -27,7 +28,7 @@ public class ColorSequence : MonoBehaviour
 
         Color32 color = _colorsSequence[_currentColorIndex];
 
-        EventBus.Invoke(new ColorSwapEvent(color));
+        EventBus.Invoke(new OnColorSwapEvent(color));
     }
 
 }

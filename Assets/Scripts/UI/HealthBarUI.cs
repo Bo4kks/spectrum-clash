@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarUI : MonoBehaviour
+public class HealthBarUI : MonoBehaviour, IEventListener
 {
     private Image _healthBar;
 
@@ -10,12 +10,12 @@ public class HealthBarUI : MonoBehaviour
         _healthBar = GetComponent<Image>();
     }
 
-    private void OnEnable()
+    public void OnEnable()
     {
         EventBus.Subscribe<OnUIHPChanged>(RefillHealthBar);
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
         EventBus.Unsubscribe<OnUIHPChanged>(RefillHealthBar);
     }

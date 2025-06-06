@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public struct ColorSwapEvent
+public struct OnColorSwapEvent
 {
     public Color32 NewColor { get; private set; }
 
-    public ColorSwapEvent(Color32 color)
+    public OnColorSwapEvent(Color32 color)
     {
         NewColor = color;
     }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour, IEventListener
 {
     [SerializeField] private float _health;
 
@@ -17,12 +17,12 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    public void OnEnable()
     {
         EventBus.Subscribe<OnEnemyHitPlayerEvent>(TakeDamage);
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
         EventBus.Unsubscribe<OnEnemyHitPlayerEvent>(TakeDamage);
     }

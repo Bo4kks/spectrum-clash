@@ -12,10 +12,11 @@ public class EnemyPool : MonoBehaviour
         foreach (var prefab in _enemyPrefabs)
         {
             var data = prefab.EnemyData;
+
             if (!_pools.ContainsKey(data))
                 _pools[data] = new Queue<Enemy>();
 
-            for (int i = 0; i < _enemyPrefabs.Length; i++)
+            for (int i = 0; i < 5; i++)
             {
                 var enemy = Instantiate(prefab, transform);
                 enemy.gameObject.SetActive(false);
@@ -29,11 +30,12 @@ public class EnemyPool : MonoBehaviour
     {
         if (!_pools.ContainsKey(data))
         {
-            Debug.LogError($"[EnemyPool] No prefab registered for data: {data.name}");
+            Debug.LogError($"[EnemyPool] No pool found for: {data.name}");
             return null;
         }
 
         Enemy enemy;
+
         if (_pools[data].Count > 0)
         {
             enemy = _pools[data].Dequeue();
@@ -60,11 +62,19 @@ public class EnemyPool : MonoBehaviour
 
     public void ReturnToPool(GameObject enemyObj, EnemyDataSO data)
     {
-        enemyObj.SetActive(false);
-
-        if (_pools.ContainsKey(data) && enemyObj.TryGetComponent(out Enemy enemy))
+        if (enemyObj.TryGetComponent(out Enemy enemy))
         {
-            _pools[data].Enqueue(enemy);
+            enemy.gameObject.SetActive(false);
+
+            if (_pools.ContainsKey(data))
+            {
+                _pools[data].Enqueue(enemy);
+            }
+            else
+            {
+                Destroy(enemy.gameObject);
+                Debug.LogWarning($"[EnemyPool] Tried to return to unknown pool: {data.name}");
+            }
         }
         else
         {
@@ -79,6 +89,7 @@ public class EnemyPool : MonoBehaviour
             if (prefab.EnemyData == data)
                 return prefab;
         }
+
         return null;
     }
 }
