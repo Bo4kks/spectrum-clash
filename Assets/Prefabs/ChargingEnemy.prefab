@@ -117,7 +117,7 @@ Transform:
   m_GameObject: {fileID: 7877177411686705825}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.3, y: 0.217, z: 0.043440517}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.17386992, y: 0.17386992, z: 0.17386992}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -299,11 +299,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyData: {fileID: 11400000, guid: d51f86b67e6e0b5469e38f0bdb43e4eb, type: 2}
+  _enemiesDifficulty: {fileID: 0}
   speed: 0
+  damage: 0
   color:
     serializedVersion: 2
     rgba: 4278190080
-  damage: 0
   _lineRenderer: {fileID: 6935484187007194702}
   _chargeSpeedMultiplier: 2
   _movePoint: {fileID: 0}

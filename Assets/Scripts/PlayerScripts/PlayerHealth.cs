@@ -1,8 +1,11 @@
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour, IEventListener
+public class PlayerHealth : MonoBehaviour, IEventListener, IEventPusher
 {
     [SerializeField] private float _health;
+
+    [Header("BugFix&Test")]
+    [SerializeField] private bool _isCanDie = true;
 
     public float Health
     {
@@ -12,8 +15,21 @@ public class PlayerHealth : MonoBehaviour, IEventListener
         }
         private set
         {
-            _health = value;
+            if (value < 0f)
+            {
+                _health = 0f;
+            }
+            else
+            {
+                _health = value;
+            }
+
             EventBus.Invoke(new OnUIHPChanged(_health));
+
+            if (_health <= 0 && _isCanDie)
+            {
+                GameOver();
+            }
         }
     }
 
@@ -30,6 +46,7 @@ public class PlayerHealth : MonoBehaviour, IEventListener
     private void TakeDamage(OnEnemyHitPlayerEvent @event)
     {
         Health -= @event.Damage;
-        Debug.Log($"Take damage - {@event.Damage}");
     }
+
+    private void GameOver() => EventBus.Invoke(new OnGameOverEvent());
 }

@@ -35,27 +35,17 @@ public abstract class Enemy : MonoBehaviour, IEnemy, IEventPusher
         }
     }
 
-    public void SetPool(EnemyPool enemyPool)
-    {
-        pool = enemyPool;
-    }
+    public void SetPool(EnemyPool enemyPool) => pool = enemyPool;
 
-    protected virtual void FixedUpdate()
-    {
-        Move();
-    }
+    protected virtual void FixedUpdate() => Move();
 
     protected abstract void Move();
 
-    public virtual void ReturnToPool()
-    {
-        pool.ReturnToPool(gameObject, _enemyData);
-    }
+    public virtual void ReturnToPool() => pool.ReturnToPool(gameObject, _enemyData);
 
     public virtual void OnHitPlayer()
     {
         EventBus.Invoke(new OnEnemyHitPlayerEvent(damage));
         ReturnToPool();
     }
-
 }

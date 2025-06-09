@@ -7,6 +7,8 @@ public class ColorSequence : MonoBehaviour, IEventListener, IEventPusher
     [SerializeField] private List<Color32> _colorsSequence;
     [SerializeField] private int _currentColorIndex = 0;
 
+    public List<Color32> ColorsSequence { get { return _colorsSequence; } }
+
     public void OnEnable()
     {
         EventBus.Subscribe<OnTouchZonePressedEvent>(OnTouchZonePressed);

@@ -962,6 +962,7 @@ RectTransform:
   m_Children:
   - {fileID: 376212883}
   - {fileID: 454104590}
+  - {fileID: 2145929251}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1768,6 +1769,8 @@ MonoBehaviour:
   _enemyPrefabs:
   - {fileID: 2032121648225105591, guid: f264983a10b419744b889b586f0634f9, type: 3}
   - {fileID: 8518647892501826197, guid: f445c25db5425fb41814b748404496e9, type: 3}
+  - {fileID: 6067993010640394785, guid: 1e0547c4cfc16d04aa035c196f411a60, type: 3}
+  - {fileID: 3727718279102708941, guid: 178fba1cf7c88164d95f99eb995ea7d8, type: 3}
 --- !u!1 &317308838
 GameObject:
   m_ObjectHideFlags: 0
@@ -2175,6 +2178,8 @@ MonoBehaviour:
   _enemyData:
   - {fileID: 11400000, guid: 0aca687ede14d33499be2f157b907f3f, type: 2}
   - {fileID: 11400000, guid: d51f86b67e6e0b5469e38f0bdb43e4eb, type: 2}
+  - {fileID: 11400000, guid: c6dfd70db9d65f742a6924cba9e75479, type: 2}
+  - {fileID: 11400000, guid: 51009d50f3d54864e903058caa7909e5, type: 2}
   _enemyPool: {fileID: 312345257}
   _spawnInterval: 0.5
 --- !u!4 &386362556
@@ -2776,6 +2781,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &514798948
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 514798949}
+  m_Layer: 5
+  m_Name: BG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &514798949
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514798948}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2145929251}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3651,7 +3691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelTimer: 0
-  _isTimerActive: 0
+  _isTimerActive: 1
 --- !u!1 &757422326
 GameObject:
   m_ObjectHideFlags: 0
@@ -4314,6 +4354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 100
+  _isCanDie: 0
 --- !u!1 &915948381
 GameObject:
   m_ObjectHideFlags: 0
@@ -9720,6 +9761,42 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2145929250
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2145929251}
+  m_Layer: 5
+  m_Name: GameOverScreen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2145929251
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145929250}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 514798949}
+  m_Father: {fileID: 183957919}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

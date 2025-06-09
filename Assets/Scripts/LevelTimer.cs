@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class LevelTimer : MonoBehaviour
+public class LevelTimer : MonoBehaviour, IEventListener
 {
     [SerializeField] private float _levelTimer;
-    [SerializeField] private bool _isTimerActive;
+    [SerializeField] private bool _isTimerActive = true;
 
     public float LevelTime
     {
@@ -17,14 +17,15 @@ public class LevelTimer : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+
+    public void OnEnable()
     {
-        _isTimerActive = true;
+        EventBus.Subscribe<OnGameOverEvent>(GameOver);
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
-        _isTimerActive = false;
+        EventBus.Unsubscribe<OnGameOverEvent>(GameOver);
     }
 
     private void Update()
@@ -34,4 +35,6 @@ public class LevelTimer : MonoBehaviour
             LevelTime += Time.deltaTime;
         }
     }
+
+    private void GameOver(OnGameOverEvent ev) => _isTimerActive = false;
 }
