@@ -12,11 +12,16 @@ public class ChargingEnemy : Enemy
 
     private System.Action _currentState;
 
+    protected override void Awake()
+    {
+        base.Awake();
+
+        _movePoints = FindObjectsByType<MovePointMarker>(FindObjectsSortMode.None);
+    }
+
     public override void Initialize(EnemyDataSO enemyDataSO)
     {
         base.Initialize(enemyDataSO);
-
-        _movePoints = FindObjectsByType<MovePointMarker>(FindObjectsSortMode.None);
 
         _movePoint = _movePoints[Random.Range(0, _movePoints.Length)].transform;
 
@@ -68,12 +73,12 @@ public class ChargingEnemy : Enemy
         transform.position += (Vector3)(_chargeSpeedMultiplier * speed * Time.deltaTime * _chargeDirection);
     }
 
-    public override void ReturnToPool()
+    public override void Kill()
     {
         if (_lineRenderer != null)
             _lineRenderer.enabled = false;
 
-        base.ReturnToPool();
+        base.Kill();
     }
 
     private void RotateTowards(Vector2 direction)

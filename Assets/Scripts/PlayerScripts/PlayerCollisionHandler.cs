@@ -15,7 +15,7 @@ public class PlayerCollisionHandler : MonoBehaviour
         {
             if (enemy.Color == _spriteRenderer.color)
             {
-                enemy.ReturnToPool();
+                enemy.Kill();
             }
             else
             {

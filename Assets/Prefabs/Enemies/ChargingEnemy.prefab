@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 8518647892501826197}
   - component: {fileID: -3658863644925670916}
   - component: {fileID: -5881366256876794903}
+  - component: {fileID: 5822563005294768870}
   m_Layer: 0
   m_Name: ChargingEnemy
   m_TagString: Untagged
@@ -374,3 +375,18 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.055
+--- !u!114 &5822563005294768870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7877177411686705825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8940ddb067be12248b9a01c8a983d5a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _deathParticles: {fileID: 4062108051456489350, guid: 2d9c2de3e6551d54da44f42bb8ff775e, type: 3}
+  _fadeDuration: 0.5
+  _fadeEase: 5

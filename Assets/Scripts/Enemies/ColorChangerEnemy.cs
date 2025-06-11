@@ -47,14 +47,14 @@ public class ColorChangerEnemy : Enemy
         }
     }
 
-    public override void ReturnToPool()
+    public override void Kill()
     {
         if (_changeColorCoroutine != null)
         {
-            StopCoroutine(nameof(ChangeColorRoutine));
+            StopCoroutine(_changeColorCoroutine);
             _changeColorCoroutine = null;
         }
 
-        base.ReturnToPool();
+        base.Kill();
     }
 }

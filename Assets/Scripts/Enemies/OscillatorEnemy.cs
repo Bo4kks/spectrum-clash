@@ -43,9 +43,9 @@ public class OscillatorEnemy : Enemy
         transform.Rotate(Vector3.forward, _rotationSpeed * Time.deltaTime);
     }
 
-    public override void ReturnToPool()
+    public override void Kill()
     {
         _oscillationTween?.Kill();
-        base.ReturnToPool();
+        base.Kill();
     }
 }
