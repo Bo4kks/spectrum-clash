@@ -12,14 +12,16 @@ public class PlayerRendererHandler : MonoBehaviour, IEventListener
     public void OnEnable()
     {
         EventBus.Subscribe<OnGameOverEvent>(TurnOffSpriteRenderer);
+        EventBus.Subscribe<OnGameRestartEvent>(TurnOnSpriteRenderer);
     }
 
     public void OnDisable()
     {
         EventBus.Unsubscribe<OnGameOverEvent>(TurnOffSpriteRenderer);
+        EventBus.Unsubscribe<OnGameRestartEvent>(TurnOnSpriteRenderer);
     }
 
     private void TurnOffSpriteRenderer(OnGameOverEvent ev) => _spriteRenderer.enabled = false;
 
-    private void TurnOnSpriteRenderer() => _spriteRenderer.enabled = true;
+    private void TurnOnSpriteRenderer(OnGameRestartEvent ev) => _spriteRenderer.enabled = true;
 }

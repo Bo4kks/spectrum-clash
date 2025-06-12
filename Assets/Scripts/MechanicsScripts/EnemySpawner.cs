@@ -20,11 +20,13 @@ public class EnemySpawner : MonoBehaviour, IEventListener
     public void OnEnable()
     {
         EventBus.Subscribe<OnGameOverEvent>(GameOver);
+        EventBus.Subscribe<OnGameRestartEvent>(GameRestart);
     }
 
     public void OnDisable()
     {
         EventBus.Unsubscribe<OnGameOverEvent>(GameOver);
+        EventBus.Unsubscribe<OnGameRestartEvent>(GameRestart);
     }
 
     private void SpawnEnemy()
@@ -34,17 +36,16 @@ public class EnemySpawner : MonoBehaviour, IEventListener
         _enemyPool.SpawnEnemy(spawnPoint.position, _enemyData[Random.Range(0, _enemyData.Count)]); // test
     }
 
-    private void GameOver(OnGameOverEvent @event)
-    {
-        StopCoroutine(nameof(SpawnEnemiesRoutine));
-    }
+    private void GameOver(OnGameOverEvent @event) => StopCoroutine(nameof(SpawnEnemiesRoutine));
 
+    private void GameRestart(OnGameRestartEvent @event) => StartCoroutine(nameof(SpawnEnemiesRoutine));
 
     private IEnumerator SpawnEnemiesRoutine()
     {
         while (true)
         {
             SpawnEnemy();
+            Debug.Log("Spawn Enemy!");
             yield return new WaitForSeconds(_spawnInterval);
         }
     }

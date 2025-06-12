@@ -1,13 +1,25 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemiesBuffer : MonoBehaviour, IEventPusher
+public class EnemiesBuffer : MonoBehaviour, IEventPusher, IEventListener
 {
     private LevelController _levelController;
 
     private void Awake()
     {
         _levelController = FindFirstObjectByType<LevelController>();
+    }
+
+    public void OnEnable()
+    {
+        EventBus.Subscribe<OnGameOverEvent>(StopCoroutine);
+        EventBus.Subscribe<OnGameRestartEvent>(StartCoroutine);
+    }
+
+    public void OnDisable()
+    {
+        EventBus.Unsubscribe<OnGameOverEvent>(StopCoroutine);
+        EventBus.Unsubscribe<OnGameRestartEvent>(StartCoroutine);
     }
 
     private void Start()
@@ -26,4 +38,8 @@ public class EnemiesBuffer : MonoBehaviour, IEventPusher
             Debug.Log("Enemies buffed!");
         }
     }
+
+    private void StartCoroutine(OnGameRestartEvent ev) => StartCoroutine(nameof(BuffEnemiesRoutine));
+
+    private void StopCoroutine(OnGameOverEvent ev) => StopCoroutine(nameof(BuffEnemiesRoutine));
 }

@@ -14,12 +14,14 @@ public class CharacterColorSwap : MonoBehaviour, IEventListener
     {
         EventBus.Subscribe<OnColorSwapEvent>(OnColorChanged);
         EventBus.Subscribe<OnGameOverEvent>(GameOver);
+        EventBus.Subscribe<OnGameRestartEvent>(GameRestart);
     }
 
     public void OnDisable()
     {
         EventBus.Unsubscribe<OnColorSwapEvent>(OnColorChanged);
         EventBus.Unsubscribe<OnGameOverEvent>(GameOver);
+        EventBus.Unsubscribe<OnGameRestartEvent>(GameRestart);
     }
 
     private void OnColorChanged(OnColorSwapEvent ev)
@@ -30,5 +32,7 @@ public class CharacterColorSwap : MonoBehaviour, IEventListener
         }
     }
 
-    private void GameOver(OnGameOverEvent ev) => _isGameOver = true;
+    private void GameOver(OnGameOverEvent @event) => _isGameOver = true;
+
+    private void GameRestart(OnGameRestartEvent @event) => _isGameOver = false;
 }

@@ -7,6 +7,8 @@ public class PlayerHealth : MonoBehaviour, IEventListener, IEventPusher
     [Header("BugFix&Test")]
     [SerializeField] private bool _isCanDie = true;
 
+    private float _startHealthValue;
+
     public float Health
     {
         get
@@ -33,14 +35,21 @@ public class PlayerHealth : MonoBehaviour, IEventListener, IEventPusher
         }
     }
 
+    private void Start()
+    {
+        _startHealthValue = _health;
+    }
+
     public void OnEnable()
     {
         EventBus.Subscribe<OnEnemyHitPlayerEvent>(TakeDamage);
+        EventBus.Subscribe<OnGameRestartEvent>(UpdateFields);
     }
 
     public void OnDisable()
     {
         EventBus.Unsubscribe<OnEnemyHitPlayerEvent>(TakeDamage);
+        EventBus.Subscribe<OnGameRestartEvent>(UpdateFields);
     }
 
     private void TakeDamage(OnEnemyHitPlayerEvent @event)
@@ -49,4 +58,6 @@ public class PlayerHealth : MonoBehaviour, IEventListener, IEventPusher
     }
 
     private void GameOver() => EventBus.Invoke(new OnGameOverEvent());
+
+    private void UpdateFields(OnGameRestartEvent @event) => Health = _startHealthValue;
 }
