@@ -13,16 +13,16 @@ public class HealthUIText : MonoBehaviour, IEventListener
 
     public void OnEnable()
     {
-        EventBus.Subscribe<OnUIHPChanged>(ChangeHpValue);
+        EventBus.Subscribe<OnHPChanged>(ChangeHpValue);
     }
 
     public void OnDisable()
     {
-        EventBus.Unsubscribe<OnUIHPChanged>(ChangeHpValue);
+        EventBus.Unsubscribe<OnHPChanged>(ChangeHpValue);
     }
 
-    private void ChangeHpValue(OnUIHPChanged @event)
+    private void ChangeHpValue(OnHPChanged @event)
     {
-        _healthText.text = @event.HPValue.ToString();
+        _healthText.text = @event.HPValue.ToString("#.##");
     }
 }

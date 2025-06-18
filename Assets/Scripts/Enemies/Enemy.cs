@@ -10,6 +10,7 @@ public abstract class Enemy : MonoBehaviour, IEnemy, IEventPusher
 {
     [SerializeField] private EnemyDataSO _enemyData;
     [SerializeField] private EnemiesDifficulty _enemiesDifficulty;
+    [SerializeField] private CurrencyTypes _currencyType;
     [SerializeField] protected float speed;
     [SerializeField] protected float damage;
     [SerializeField] protected Color32 color;
@@ -44,6 +45,7 @@ public abstract class Enemy : MonoBehaviour, IEnemy, IEventPusher
         color = data.Color;
         speed = data.Speed * _enemiesDifficulty.SpeedMultiplier;
         damage = data.Damage * _enemiesDifficulty.DamageMultiplier;
+        _currencyType = data.CurrencyType;
 
         if (spriteRenderer != null)
         {
@@ -57,10 +59,14 @@ public abstract class Enemy : MonoBehaviour, IEnemy, IEventPusher
 
     protected abstract void Move();
 
+    protected virtual void GivePlayerCurrency() => EventBus.Invoke(new OnPlayerEarnedCurrencyEvent(_currencyType));
+
     public virtual void Kill()
     {
         if (_isDead) return;
         _isDead = true;
+
+        GivePlayerCurrency();
 
         _deathEffect.PlayDeathEffect();
 

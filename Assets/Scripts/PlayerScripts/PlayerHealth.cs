@@ -2,42 +2,47 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, IEventListener, IEventPusher
 {
-    [SerializeField] private float _health;
+    [SerializeField] private float _currentHealth;
 
     [Header("BugFix&Test")]
     [SerializeField] private bool _isCanDie = true;
 
-    private float _startHealthValue;
+    private PlayerStats _playerStats;
 
-    public float Health
+    public float CurrentHealth
     {
         get
         {
-            return _health;
+            return _currentHealth;
         }
         private set
         {
             if (value < 0f)
             {
-                _health = 0f;
+                _currentHealth = 0f;
             }
             else
             {
-                _health = value;
+                _currentHealth = value;
             }
 
-            EventBus.Invoke(new OnUIHPChanged(_health));
+            EventBus.Invoke(new OnHPChanged(_currentHealth));
 
-            if (_health <= 0 && _isCanDie)
+            if (_currentHealth <= 0 && _isCanDie)
             {
                 GameOver();
             }
         }
     }
 
+    private void Awake()
+    {
+        _playerStats = GetComponent<PlayerStats>();
+    }
+
     private void Start()
     {
-        _startHealthValue = _health;
+        RefillHealth();
     }
 
     public void OnEnable()
@@ -49,15 +54,17 @@ public class PlayerHealth : MonoBehaviour, IEventListener, IEventPusher
     public void OnDisable()
     {
         EventBus.Unsubscribe<OnEnemyHitPlayerEvent>(TakeDamage);
-        EventBus.Subscribe<OnGameRestartEvent>(UpdateFields);
+        EventBus.Unsubscribe<OnGameRestartEvent>(UpdateFields);
     }
 
     private void TakeDamage(OnEnemyHitPlayerEvent @event)
     {
-        Health -= @event.Damage;
+        CurrentHealth -= @event.Damage;
     }
+
+    private void RefillHealth() => CurrentHealth = _playerStats.GetFloat(FloatStatType.MaxHealth);
 
     private void GameOver() => EventBus.Invoke(new OnGameOverEvent());
 
-    private void UpdateFields(OnGameRestartEvent @event) => Health = _startHealthValue;
+    private void UpdateFields(OnGameRestartEvent @event) => RefillHealth();
 }

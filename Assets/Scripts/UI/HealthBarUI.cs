@@ -12,15 +12,15 @@ public class HealthBarUI : MonoBehaviour, IEventListener
 
     public void OnEnable()
     {
-        EventBus.Subscribe<OnUIHPChanged>(RefillHealthBar);
+        EventBus.Subscribe<OnHPChanged>(RefillHealthBar);
     }
 
     public void OnDisable()
     {
-        EventBus.Unsubscribe<OnUIHPChanged>(RefillHealthBar);
+        EventBus.Unsubscribe<OnHPChanged>(RefillHealthBar);
     }
 
-    private void RefillHealthBar(OnUIHPChanged @event)
+    private void RefillHealthBar(OnHPChanged @event)
     {
         float currentHealth = @event.HPValue;
 

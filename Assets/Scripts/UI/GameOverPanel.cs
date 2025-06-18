@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using DG.Tweening;
 
@@ -11,12 +10,16 @@ public class GameOverPanel : MonoBehaviour, IEventListener, IEventPusher
     {
         EventBus.Subscribe<OnGameOverEvent>(ShowGameOverScreen);
         EventBus.Subscribe<OnGameRestartEvent>(HideGameOverScreen);
+        EventBus.Subscribe<OnPlayerGoToUpgradesShop>(InstantHideGameOverScreen);
+        EventBus.Subscribe<OnPlayerQuitUpgradeShop>(InstantShowGameOverScreen);
     }
 
     public void OnDisable()
     {
         EventBus.Unsubscribe<OnGameOverEvent>(ShowGameOverScreen);
         EventBus.Unsubscribe<OnGameRestartEvent>(HideGameOverScreen);
+        EventBus.Unsubscribe<OnPlayerGoToUpgradesShop>(InstantHideGameOverScreen);
+        EventBus.Unsubscribe<OnPlayerQuitUpgradeShop>(InstantShowGameOverScreen);
     }
 
     private void ShowGameOverScreen(OnGameOverEvent @event)
@@ -31,5 +34,13 @@ public class GameOverPanel : MonoBehaviour, IEventListener, IEventPusher
         _gameOverScreen.DOFade(0f, _fadeDurationInSeconds);
     }
 
+    private void InstantHideGameOverScreen(OnPlayerGoToUpgradesShop @event)
+    {
+        _gameOverScreen.alpha = 0f;
+    }
 
+    private void InstantShowGameOverScreen(OnPlayerQuitUpgradeShop @event)
+    {
+        _gameOverScreen.alpha = 1f;
+    }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class ColorChangerEnemy : Enemy
@@ -10,11 +11,18 @@ public class ColorChangerEnemy : Enemy
     private ColorSequence _colorSequence;
     private int _colorIndex = 0;
     private Coroutine _changeColorCoroutine;
+    private Color32 _currentColor;
+
+    private Color32 _redColor;
+    private Color32 _yellowColor;
 
     private void Start()
     {
         _colorSequence = FindFirstObjectByType<ColorSequence>();
         _availableColors = _colorSequence.ColorsSequence;
+
+        _redColor = _availableColors[0];
+        _yellowColor = _availableColors[1];
     }
 
     protected override void Move()
@@ -30,6 +38,18 @@ public class ColorChangerEnemy : Enemy
         _changeColorCoroutine = StartCoroutine(nameof(ChangeColorRoutine));
     }
 
+    protected override void GivePlayerCurrency()
+    {
+        if (_currentColor.Equals(_redColor))
+        {
+            EventBus.Invoke(new OnPlayerEarnedCurrencyEvent(CurrencyTypes.RedCurrency));
+        }
+        else if (_currentColor.Equals(_yellowColor))
+        {
+            EventBus.Invoke(new OnPlayerEarnedCurrencyEvent(CurrencyTypes.YellowCurrency));
+        }
+    }
+
     private IEnumerator ChangeColorRoutine()
     {
         while (true)
@@ -43,6 +63,7 @@ public class ColorChangerEnemy : Enemy
 
             spriteRenderer.color = _availableColors[_colorIndex];
             color = spriteRenderer.color;
+            _currentColor = color;
             _colorIndex++;
         }
     }

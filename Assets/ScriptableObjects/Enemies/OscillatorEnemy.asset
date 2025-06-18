@@ -15,5 +15,6 @@ MonoBehaviour:
   _speed: 3
   _color:
     serializedVersion: 2
-    rgba: 4278254591
+    rgba: 4282312180
   _damage: 20
+  _currencyType: 1

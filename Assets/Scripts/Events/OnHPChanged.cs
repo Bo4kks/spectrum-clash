@@ -1,8 +1,8 @@
-public struct OnUIHPChanged
+public struct OnHPChanged
 {
     public float HPValue { get; private set; }
 
-    public OnUIHPChanged(float value)
+    public OnHPChanged(float value)
     {
         HPValue = value;
     }

@@ -235,7 +235,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -273,7 +273,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -1823,7 +1823,74 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      IconMap_0: 7691450083930110639
+      IconMap_1: -5531696799899297145
+      IconMap_10: -1631598353201654498
+      IconMap_11: -7356403927896541031
+      IconMap_12: 2599725816074013049
+      IconMap_13: -926707886263592888
+      IconMap_14: -7169638907095213104
+      IconMap_15: -2105169893252774419
+      IconMap_16: 6098603253841766027
+      IconMap_17: -1564076182836100074
+      IconMap_18: -5120420600586195808
+      IconMap_19: -4168633789767850903
+      IconMap_2: -242771027289603687
+      IconMap_20: -7041942523957477082
+      IconMap_21: 5868320006117571130
+      IconMap_22: 3762038885558307468
+      IconMap_23: 6500702304727410906
+      IconMap_24: -5999419776379434097
+      IconMap_25: 4915021726125509365
+      IconMap_26: -830898365252984377
+      IconMap_27: 5936963007314571210
+      IconMap_28: -6115759508549806445
+      IconMap_29: -2933567707747964339
+      IconMap_3: -7331808010073139242
+      IconMap_30: -8080449149287381479
+      IconMap_31: -6725316194887843428
+      IconMap_32: 2759119040057465728
+      IconMap_33: -177383798473268975
+      IconMap_34: -8062167443009717876
+      IconMap_35: -7551816203851500195
+      IconMap_36: 4756355520119834079
+      IconMap_37: 1229269805034301165
+      IconMap_38: 583488865147371763
+      IconMap_39: -176081463991915522
+      IconMap_4: -6357681255454787146
+      IconMap_40: -5222056971741902952
+      IconMap_41: -2175901766780671495
+      IconMap_42: 9006174039916769068
+      IconMap_43: 6515874455079204183
+      IconMap_44: 837648944045960978
+      IconMap_45: -8039905691916436200
+      IconMap_46: -2187736296500663121
+      IconMap_47: 239602831106165219
+      IconMap_48: 8532602996516634636
+      IconMap_49: 7168474459756223906
+      IconMap_5: -5593284500715453290
+      IconMap_50: 8383691259417993442
+      IconMap_51: -3237829897208859638
+      IconMap_52: -7814433110876885308
+      IconMap_53: -6195024723477458212
+      IconMap_54: -7187318202086650796
+      IconMap_55: 7382463391878611134
+      IconMap_56: 7199538899376148650
+      IconMap_57: -9139777663204529330
+      IconMap_58: -3576820362042296277
+      IconMap_59: -4138699220802860036
+      IconMap_6: -5633652971565163163
+      IconMap_60: -2857976071235261879
+      IconMap_61: -2816928587121769604
+      IconMap_62: -8336405572494206733
+      IconMap_63: 7191127619099071328
+      IconMap_64: -7393677721133384432
+      IconMap_65: 8181175301150538618
+      IconMap_66: 5913817221819070351
+      IconMap_7: 2706807740755132075
+      IconMap_8: 9000835071638079869
+      IconMap_9: 7348278731712279233
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

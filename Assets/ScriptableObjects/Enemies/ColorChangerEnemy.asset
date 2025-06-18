@@ -17,3 +17,4 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 0
   _damage: 25
+  _currencyType: 4

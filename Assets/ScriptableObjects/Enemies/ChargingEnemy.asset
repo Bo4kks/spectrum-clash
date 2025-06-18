@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7801c33da7433d842b7e6a7e17929988, type: 3}
   m_Name: ChargingEnemy
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 7877177411686705825, guid: f445c25db5425fb41814b748404496e9, type: 3}
   _speed: 3
   _color:
     serializedVersion: 2
-    rgba: 4278254591
+    rgba: 4282312180
   _damage: 20
+  _currencyType: 1
