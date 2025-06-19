@@ -11,6 +11,7 @@ public class FunctionalUpgrade : Upgrade, IUpgrade
         if (_featureObject != null && isUpgradePurchased)
         {
             _featureObject.SetActive(true);
+            isUpgradePurchased = true;
         }
     }
 }

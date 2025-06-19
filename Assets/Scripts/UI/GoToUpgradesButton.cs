@@ -17,23 +17,24 @@ public class GoToUpgradesButton : MonoBehaviour, IEventListener
 
     public void OnEnable()
     {
-        EventBus.Subscribe<OnGameOverEvent>(SetButtonInteractableToTrue);
+        EventBus.Subscribe<OnGameOverPanelFadeComplete>(SetButtonInteractableToTrue);
         EventBus.Subscribe<OnGameRestartEvent>(SetButtonInteractableToFalse);
     }
 
     public void OnDisable()
     {
-        EventBus.Unsubscribe<OnGameOverEvent>(SetButtonInteractableToTrue);
+        EventBus.Unsubscribe<OnGameOverPanelFadeComplete>(SetButtonInteractableToTrue);
         EventBus.Unsubscribe<OnGameRestartEvent>(SetButtonInteractableToFalse);
     }
 
-    private void SetButtonInteractableToTrue(OnGameOverEvent @event) => _goToUpgradesButton.interactable = true;
+    private void SetButtonInteractableToTrue(OnGameOverPanelFadeComplete @event) => _goToUpgradesButton.interactable = true;
 
     private void SetButtonInteractableToFalse(OnGameRestartEvent @event) => _goToUpgradesButton.interactable = false;
 
     public void GoToUpgradeShop()
     {
         EventBus.Invoke(new OnPlayerGoToUpgradesShop());
+        Debug.Log("Go to upgrades shop button clicked.");
     }
 
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class Upgrade : MonoBehaviour
 {
-    protected bool isUpgradePurchased = false;
+    [SerializeField] protected bool isUpgradePurchased = false;
 
     protected virtual void Initialize()
     {

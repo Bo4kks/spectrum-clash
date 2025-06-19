@@ -3,6 +3,12 @@ using System.Collections.Generic;
 
 public class PlayerStats : MonoBehaviour
 {
+    [SerializeField] private float _maxHealth = 100f;
+    [SerializeField] private float _maxEnergy = 100f;
+    [SerializeField] private float _energyRegenPerSecond = 1f;
+    [SerializeField] private bool _isHealthRegenEnabled = false;
+    [SerializeField] private int _armor = 0;
+
     private Dictionary<FloatStatType, float> _floatStats = new();
     private Dictionary<IntStatType, int> _intStats = new();
     private Dictionary<BoolStatType, bool> _boolStats = new();
@@ -13,11 +19,11 @@ public class PlayerStats : MonoBehaviour
 
     private void Awake()
     {
-        _floatStats[FloatStatType.MaxHealth] = 100f;
-        _floatStats[FloatStatType.MaxEnergy] = 100f;
-        _floatStats[FloatStatType.EnergyRegenPerSecond] = 1f;
-        _boolStats[BoolStatType.IsHealthRegenEnabled] = false;
-        _intStats[IntStatType.Armor] = 0;
+        _floatStats[FloatStatType.MaxHealth] = _maxHealth;
+        _floatStats[FloatStatType.MaxEnergy] = _maxEnergy;
+        _floatStats[FloatStatType.EnergyRegenPerSecond] = _energyRegenPerSecond;
+        _boolStats[BoolStatType.IsHealthRegenEnabled] = _isHealthRegenEnabled;
+        _intStats[IntStatType.Armor] = _armor;
     }
 
     private void OnEnable()

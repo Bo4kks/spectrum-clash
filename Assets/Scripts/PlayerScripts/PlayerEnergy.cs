@@ -4,6 +4,7 @@ public class PlayerEnergy : MonoBehaviour
 {
     [SerializeField] private float _currentEnergy;
     [SerializeField] private bool _isEnergyRegenActive = false;
+    [SerializeField] private bool _canRegenerate = true;
 
     private PlayerStats _playerStats;
 
@@ -33,23 +34,32 @@ public class PlayerEnergy : MonoBehaviour
     public void OnEnable()
     {
         EventBus.Subscribe<OnGameRestartEvent>(SetEnergyToMaxEnergyValue);
+        EventBus.Subscribe<OnGameOverEvent>(StopRegenerate);
     }
 
     public void OnDisable()
     {
         EventBus.Unsubscribe<OnGameRestartEvent>(SetEnergyToMaxEnergyValue);
+        EventBus.Unsubscribe<OnGameOverEvent>(StopRegenerate);
     }
 
     private void Update()
     {
-        if (CurrentEnergy < _playerStats.GetFloat(FloatStatType.MaxEnergy) && _isEnergyRegenActive)
+        if (CurrentEnergy < _playerStats.GetFloat(FloatStatType.MaxEnergy) && _isEnergyRegenActive && _canRegenerate)
         {
             CurrentEnergy += _playerStats.GetFloat(FloatStatType.EnergyRegenPerSecond) * Time.deltaTime;
             CurrentEnergy = Mathf.Min(CurrentEnergy, _playerStats.GetFloat(FloatStatType.MaxEnergy));
         }
     }
 
-    private void SetEnergyToMaxEnergyValue(OnGameRestartEvent @event) => _currentEnergy = _playerStats.GetFloat(FloatStatType.MaxEnergy);
+    private void SetEnergyToMaxEnergyValue(OnGameRestartEvent @event)
+    {
+        CurrentEnergy = _playerStats.GetFloat(FloatStatType.MaxEnergy);
+        _canRegenerate = true;
+    }
+
+    private void StopRegenerate(OnGameOverEvent @event) => _canRegenerate = false;
+
     private void SetEnergyToMaxEnergyValue() => _currentEnergy = _playerStats.GetFloat(FloatStatType.MaxEnergy);
 
     public void ConsumeEnergyPerSecond(float valuePerSecond)

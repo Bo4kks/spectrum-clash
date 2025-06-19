@@ -4,7 +4,6 @@ public class Shield : FunctionalUpgrade
 {
     [SerializeField] private float _energyCostPerSecond;
     [SerializeField] private float _activationCost;
-    [SerializeField] private GameObject _shieldSpell;
 
     private PlayerEnergy _playerEnergy;
 
@@ -56,11 +55,6 @@ public class Shield : FunctionalUpgrade
 
         _playerEnergy.SetIsEnergyRegenActive(true);
         _featureObject.SetActive(false);
-    }
-
-    protected override void AddUpgrade()
-    {
-       _shieldSpell.SetActive(true);
     }
 
     public void StartHoldingShield()

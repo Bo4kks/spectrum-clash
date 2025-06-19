@@ -12,6 +12,6 @@ public class StatsUpgrade : Upgrade, IUpgrade
 
     protected override void AddUpgrade()
     {
-        
+        isUpgradePurchased = true;
     }
 }

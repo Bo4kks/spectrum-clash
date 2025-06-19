@@ -3,21 +3,28 @@ using UnityEngine.UI;
 
 public class EnergyBarUI : MonoBehaviour, IEventListener
 {
-    private Image _energyBar;
+    [SerializeField] private Image _energyBar;
+
+    private CanvasGroup _energyBarCanvas;
+    private CanvasGroupSettings _canvasGroupSettings = new();
 
     private void Awake()
     {
-        _energyBar = GetComponent<Image>();
+        _energyBarCanvas = GetComponent<CanvasGroup>();
     }
 
     public void OnEnable()
     {
         EventBus.Subscribe<OnEnergyValueChanged>(RefillEnergyBar);
+        EventBus.Subscribe<OnPlayerGoToUpgradesShop>(HideEnergyBar);
+        EventBus.Subscribe<OnPlayerQuitUpgradeShop>(ShowEnergyBar);
     }
 
     public void OnDisable()
     {
         EventBus.Unsubscribe<OnEnergyValueChanged>(RefillEnergyBar);
+        EventBus.Unsubscribe<OnPlayerGoToUpgradesShop>(HideEnergyBar);
+        EventBus.Unsubscribe<OnPlayerQuitUpgradeShop>(ShowEnergyBar);
     }
 
     private void RefillEnergyBar(OnEnergyValueChanged @event)
@@ -25,5 +32,15 @@ public class EnergyBarUI : MonoBehaviour, IEventListener
         float currentEnergy = @event.EnergyValue;
 
         _energyBar.fillAmount = currentEnergy / 100f;
+    }
+
+    private void HideEnergyBar(OnPlayerGoToUpgradesShop @event)
+    {
+        _canvasGroupSettings.SetCanvasGroupSettings(_energyBarCanvas, false);
+    }
+
+    private void ShowEnergyBar(OnPlayerQuitUpgradeShop @event)
+    {
+        _canvasGroupSettings.SetCanvasGroupSettings(_energyBarCanvas, true);
     }
 }

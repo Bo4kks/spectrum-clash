@@ -1,16 +1,12 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UpgradesShop : MonoBehaviour, IEventListener
 {
-    [SerializeField] private CanvasGroup _currencyValuePanel;
-    [SerializeField] private GameObject _shopScrollArea;
-    [SerializeField] private Button _backToGameOverScreenButton;
-    [SerializeField] private GameObject _backToGameOverScreenImage;
+    [SerializeField] private CanvasGroup _upgradeShop;
 
     private void Awake()
     {
-        _backToGameOverScreenButton.interactable = false;
+        _upgradeShop = GetComponent<CanvasGroup>();
     }
 
     public void OnEnable()
@@ -27,17 +23,16 @@ public class UpgradesShop : MonoBehaviour, IEventListener
 
     private void InstantShowUpgradesShop(OnPlayerGoToUpgradesShop @event)
     {
-        _currencyValuePanel.alpha = 1f;
-        _shopScrollArea.SetActive(true);
-        _backToGameOverScreenImage.SetActive(true);
-        _backToGameOverScreenButton.interactable = true;
+        _upgradeShop.alpha = 1f;
+        _upgradeShop.blocksRaycasts = true;
+        _upgradeShop.interactable = true;
+
     }
 
-    private void InstantHideUpgradeShop(OnPlayerQuitUpgradeShop @event)
+    private void InstantHideUpgradeShop(OnPlayerQuitUpgradeShop @event) 
     {
-        _currencyValuePanel.alpha = 0f;
-        _shopScrollArea.SetActive(false);
-        _backToGameOverScreenImage.SetActive(false);
-        _backToGameOverScreenButton.interactable = false;
+        _upgradeShop.alpha = 0f;
+        _upgradeShop.blocksRaycasts = false;
+        _upgradeShop.interactable = false;
     }
 }

@@ -1,32 +1,32 @@
 using TMPro;
 using UnityEngine;
 
-public class CurrencyValueUIPanel : MonoBehaviour, IEventListener
+public class CurrencyValueUIPanel : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _redCurrencyValue;
     [SerializeField] private TextMeshProUGUI _yellowCurrencyValue;
     [SerializeField] private TextMeshProUGUI _greenCurrencyValue;
     [SerializeField] private TextMeshProUGUI _blueCurrencyValue;
 
-    public void OnEnable()
+    private PlayerCurrency _playerCurrency;
+
+    private void Awake()
     {
-        EventBus.Subscribe<OnPlayerEarnedRedCurrencyEvent>(ChangeRedCurrencyValue);
-        EventBus.Subscribe<OnPlayerEarnedYellowCurrencyEvent>(ChangeYellowCurrencyValue);
-        EventBus.Subscribe<OnPlayerEarnedGreenCurrencyEvent>(ChangeGreenCurrencyValue);
-        EventBus.Subscribe<OnPlayerEarnedBlueCurrencyEvent>(ChangeBlueCurrencyValue);
+        _playerCurrency = FindFirstObjectByType<PlayerCurrency>();
     }
 
-    public void OnDisable()
+    private void OnEnable()
     {
-        EventBus.Unsubscribe<OnPlayerEarnedRedCurrencyEvent>(ChangeRedCurrencyValue);
-        EventBus.Unsubscribe<OnPlayerEarnedYellowCurrencyEvent>(ChangeYellowCurrencyValue);
-        EventBus.Unsubscribe<OnPlayerEarnedGreenCurrencyEvent>(ChangeGreenCurrencyValue);
-        EventBus.Unsubscribe<OnPlayerEarnedBlueCurrencyEvent>(ChangeBlueCurrencyValue);
+        UpdateCurrencyValue();
     }
 
-    private void ChangeRedCurrencyValue(OnPlayerEarnedRedCurrencyEvent @event) => _redCurrencyValue.text = @event.CurrencyValue.ToString();
-    private void ChangeYellowCurrencyValue(OnPlayerEarnedYellowCurrencyEvent @event) => _yellowCurrencyValue.text = @event.CurrencyValue.ToString();
-    private void ChangeGreenCurrencyValue(OnPlayerEarnedGreenCurrencyEvent @event) => _greenCurrencyValue.text = @event.CurrencyValue.ToString();
-    private void ChangeBlueCurrencyValue(OnPlayerEarnedBlueCurrencyEvent @event) => _blueCurrencyValue.text = @event.CurrencyValue.ToString();
+    private void UpdateCurrencyValue()
+    {
+        _redCurrencyValue.text = _playerCurrency.RedCurrency.ToString();
+        _yellowCurrencyValue.text = _playerCurrency.YellowCurrency.ToString();
+        _greenCurrencyValue.text = _playerCurrency.GreenCurrency.ToString();
+        _blueCurrencyValue.text = _playerCurrency.BlueCurrency.ToString();
+    }
+
 
 }

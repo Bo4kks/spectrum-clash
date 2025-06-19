@@ -22,6 +22,6 @@ public class EnergyValueText : MonoBehaviour
 
     private void ChangeEnergyValue(OnEnergyValueChanged @event)
     {
-        _energyValueText.text = @event.EnergyValue.ToString("#.##");
+        _energyValueText.text = @event.EnergyValue.ToString("#");
     }
 }
