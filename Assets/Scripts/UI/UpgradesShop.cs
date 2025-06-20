@@ -1,8 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradesShop : MonoBehaviour, IEventListener
 {
     [SerializeField] private CanvasGroup _upgradeShop;
+    [SerializeField] private Image _quitButton;
+
+    private CanvasGroupSettings _canvasGroupSettings = new();
 
     private void Awake()
     {
@@ -23,16 +27,11 @@ public class UpgradesShop : MonoBehaviour, IEventListener
 
     private void InstantShowUpgradesShop(OnPlayerGoToUpgradesShop @event)
     {
-        _upgradeShop.alpha = 1f;
-        _upgradeShop.blocksRaycasts = true;
-        _upgradeShop.interactable = true;
-
+        _canvasGroupSettings.SetCanvasGroupSettingsWithException(_upgradeShop, true, _quitButton, true, false);
     }
 
     private void InstantHideUpgradeShop(OnPlayerQuitUpgradeShop @event) 
     {
-        _upgradeShop.alpha = 0f;
-        _upgradeShop.blocksRaycasts = false;
-        _upgradeShop.interactable = false;
+        _canvasGroupSettings.SetCanvasGroupSettingsWithException(_upgradeShop, false, _quitButton, true, false);
     }
 }

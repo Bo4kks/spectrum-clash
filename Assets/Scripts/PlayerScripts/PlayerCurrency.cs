@@ -15,7 +15,6 @@ public class PlayerCurrency : MonoBehaviour, IEventListener, IEventPusher
 
     public int BlueCurrency { get { return _blueCurrency; } }
 
-
     public void OnEnable()
     {
         EventBus.Subscribe<OnPlayerEarnedCurrencyEvent>(AddCurrency);

@@ -1,17 +1,66 @@
 using UnityEngine;
 
-public class StatsUpgrade : Upgrade, IUpgrade
+public abstract class StatsUpgrade : MonoBehaviour, IStatsUpgrade
 {
-    protected float maxHealth;
-    protected float healthRegen;
-    protected float maxEnergy;
-    protected float energyRegen;
-    protected int armor;
+    [Header("Upgrade Settings")]
+    [SerializeField] private int _maxLevel = 10;
+    [SerializeField] private int _basePrice = 10;
+    [SerializeField] private int _currentLevel = 0;
+    [SerializeField] private CurrencyTypes _currencyType;
 
-    public void ActivateUpgrade() => AddUpgrade();
+    private PlayerCurrency _playerCurrency;
 
-    protected override void AddUpgrade()
+    public int CurrentLevel
     {
-        isUpgradePurchased = true;
+        get { return _currentLevel; }
     }
+
+    public int MaxLevel
+    {
+        get { return _maxLevel; }
+    }
+
+    public int CurrentPrice
+    {
+        get { return _basePrice * (_currentLevel + 1); }
+    }
+
+    public CurrencyTypes CurrencyType
+    {
+        get { return _currencyType; }
+    }
+
+    public bool IsMaxed
+    {
+        get { return _currentLevel >= _maxLevel; }
+    }
+
+    protected virtual void Awake()
+    {
+        _playerCurrency = FindFirstObjectByType<PlayerCurrency>();
+    }
+
+    public bool TryPurchase()
+    {
+        if (IsMaxed)
+        {
+            Debug.Log("Upgrade already at max level.");
+            return false;
+        }
+
+        int price = CurrentPrice;
+
+        if (!_playerCurrency.TrySpend(_currencyType, price))
+        {
+            Debug.Log("Not enough currency to purchase upgrade.");
+            return false;
+        }
+
+        _currentLevel++;
+        ApplyUpgrade();
+
+        return true;
+    }
+
+    protected abstract void ApplyUpgrade();
 }

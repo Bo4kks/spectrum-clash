@@ -17,52 +17,52 @@ public class Shield : FunctionalUpgrade
 
     private void Update()
     {
-        if (_isShieldHeld && CanActivateShield())
+        if (_isShieldHeld)
         {
-            ActivateShield();
+            if (!_hasPaidActivationCost && _playerEnergy.CurrentEnergy >= _activationCost)
+            {
+                ActivateShield();
+            }
+
+            if (_hasPaidActivationCost && _playerEnergy.CurrentEnergy > 0f)
+            {
+                MaintainShield();
+            }
+            else if (_hasPaidActivationCost && _playerEnergy.CurrentEnergy <= 0f)
+            {
+                DeactivateShield();
+            }
         }
         else
         {
-            DeactivateShield();
+            if (_hasPaidActivationCost)
+            {
+                DeactivateShield();
+            }
         }
-    }
-
-    private bool CanActivateShield()
-    {
-        return _playerEnergy != null && _playerEnergy.CurrentEnergy >= _activationCost;
     }
 
     private void ActivateShield()
     {
-        if (!_hasPaidActivationCost)
-        {
-            _playerEnergy.ConsumeEnergyInstantly(_activationCost);
-            _hasPaidActivationCost = true;
-        }
+        _playerEnergy.ConsumeEnergyInstantly(_activationCost);
+        _hasPaidActivationCost = true;
 
-        _playerEnergy.ConsumeEnergyPerSecond(_energyCostPerSecond);
-        _playerEnergy.SetIsEnergyRegenActive(false);
         _featureObject.SetActive(true);
-        Debug.Log("Shield is active and consuming energy per second.");
+        _playerEnergy.SetIsEnergyRegenActive(false);
+    }
+
+    private void MaintainShield()
+    {
+        _playerEnergy.ConsumeEnergyPerSecond(_energyCostPerSecond);
     }
 
     private void DeactivateShield()
     {
-        if (_hasPaidActivationCost)
-        {
-            _hasPaidActivationCost = false;
-        }
-
-        _playerEnergy.SetIsEnergyRegenActive(true);
+        _hasPaidActivationCost = false;
         _featureObject.SetActive(false);
+        _playerEnergy.SetIsEnergyRegenActive(true);
     }
 
-    public void StartHoldingShield()
-    {
-        _isShieldHeld = true;
-    }
-    public void StopHoldingShield()
-    {
-        _isShieldHeld = false;
-    }
+    public void StartHoldingShield() => _isShieldHeld = true;
+    public void StopHoldingShield() => _isShieldHeld = false;
 }

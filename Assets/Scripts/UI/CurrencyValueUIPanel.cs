@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class CurrencyValueUIPanel : MonoBehaviour
+public class CurrencyValueUIPanel : MonoBehaviour, IEventListener
 {
     [SerializeField] private TextMeshProUGUI _redCurrencyValue;
     [SerializeField] private TextMeshProUGUI _yellowCurrencyValue;
@@ -15,12 +15,17 @@ public class CurrencyValueUIPanel : MonoBehaviour
         _playerCurrency = FindFirstObjectByType<PlayerCurrency>();
     }
 
-    private void OnEnable()
+    public void OnEnable()
     {
-        UpdateCurrencyValue();
+        EventBus.Subscribe<OnPlayerEarnedCurrencyEvent>(UpdateCurrencyValue);
     }
 
-    private void UpdateCurrencyValue()
+    public void OnDisable()
+    {
+        EventBus.Unsubscribe<OnPlayerEarnedCurrencyEvent>(UpdateCurrencyValue);
+    }
+
+    public void UpdateCurrencyValue(OnPlayerEarnedCurrencyEvent @event)
     {
         _redCurrencyValue.text = _playerCurrency.RedCurrency.ToString();
         _yellowCurrencyValue.text = _playerCurrency.YellowCurrency.ToString();
@@ -28,5 +33,11 @@ public class CurrencyValueUIPanel : MonoBehaviour
         _blueCurrencyValue.text = _playerCurrency.BlueCurrency.ToString();
     }
 
-
+    public void UpdateCurrencyValue()
+    {
+        _redCurrencyValue.text = _playerCurrency.RedCurrency.ToString();
+        _yellowCurrencyValue.text = _playerCurrency.YellowCurrency.ToString();
+        _greenCurrencyValue.text = _playerCurrency.GreenCurrency.ToString();
+        _blueCurrencyValue.text = _playerCurrency.BlueCurrency.ToString();
+    }
 }

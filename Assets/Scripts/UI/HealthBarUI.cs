@@ -4,10 +4,12 @@ using UnityEngine.UI;
 public class HealthBarUI : MonoBehaviour, IEventListener
 {
     private Image _healthBar;
+    private PlayerStats _playerStats;
 
     private void Awake()
     {
         _healthBar = GetComponent<Image>();
+        _playerStats = FindFirstObjectByType<PlayerStats>();
     }
 
     public void OnEnable()
@@ -24,6 +26,6 @@ public class HealthBarUI : MonoBehaviour, IEventListener
     {
         float currentHealth = @event.HPValue;
 
-        _healthBar.fillAmount = currentHealth / 100f;
+        _healthBar.fillAmount = currentHealth / _playerStats.GetFloat(FloatStatType.MaxHealth);
     }
 }

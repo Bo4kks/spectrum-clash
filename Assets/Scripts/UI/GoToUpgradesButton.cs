@@ -34,7 +34,6 @@ public class GoToUpgradesButton : MonoBehaviour, IEventListener
     public void GoToUpgradeShop()
     {
         EventBus.Invoke(new OnPlayerGoToUpgradesShop());
-        Debug.Log("Go to upgrades shop button clicked.");
     }
 
 }
