@@ -23,6 +23,6 @@ public class HealthUIText : MonoBehaviour, IEventListener
 
     private void ChangeHpValue(OnHPChanged @event)
     {
-        _healthText.text = @event.HPValue.ToString("#.##");
+        _healthText.text = @event.HPValue.ToString("#");
     }
 }

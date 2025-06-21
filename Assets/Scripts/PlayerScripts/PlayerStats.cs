@@ -7,6 +7,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float _maxHealth = 100f;
     [SerializeField] private float _maxEnergy = 100f;
     [SerializeField] private float _energyRegenPerSecond = 1f;
+    [SerializeField] private float _healtRegenPerSecond = 0f;
     [SerializeField] private bool _isHealthRegenEnabled = false;
     [SerializeField] private int _armor = 0;
 
@@ -38,6 +39,7 @@ public class PlayerStats : MonoBehaviour
         _floatStats[FloatStatType.MaxHealth] = _maxHealth;
         _floatStats[FloatStatType.MaxEnergy] = _maxEnergy;
         _floatStats[FloatStatType.EnergyRegenPerSecond] = _energyRegenPerSecond;
+        _floatStats[FloatStatType.HealthRegenPerSecond] = _healtRegenPerSecond;
 
         _intStats[IntStatType.Armor] = _armor;
 

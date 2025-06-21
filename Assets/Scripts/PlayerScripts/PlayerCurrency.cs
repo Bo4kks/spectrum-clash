@@ -7,13 +7,57 @@ public class PlayerCurrency : MonoBehaviour, IEventListener, IEventPusher
     [SerializeField] private int _greenCurrency;
     [SerializeField] private int _blueCurrency;
 
-    public int RedCurrency { get { return _redCurrency; } }
+    public int RedCurrency
+    {
+        get
+        {
+            return _redCurrency;
+        }
+        private set
+        {
+            _redCurrency = value;
+            EventBus.Invoke(new OnRedCurrencyValueChanged(RedCurrency));
+        }
+    }
 
-    public int YellowCurrency { get { return _yellowCurrency; } }
+    public int YellowCurrency
+    {
+        get
+        {
+            return _yellowCurrency;
+        }
+        private set
+        {
+            _yellowCurrency = value;
+            EventBus.Invoke(new OnYellowCurrencyValueChanged(YellowCurrency));
+        }
+    }
 
-    public int GreenCurrency { get { return _greenCurrency; } }
+    public int GreenCurrency
+    {
+        get
+        {
+            return _greenCurrency;
+        }
+        private set
+        {
+            _greenCurrency = value;
+            EventBus.Invoke(new OnGreenCurrencyValueChanged(GreenCurrency));
+        }
+    }
 
-    public int BlueCurrency { get { return _blueCurrency; } }
+    public int BlueCurrency
+    {
+        get
+        {
+            return _blueCurrency;
+        }
+        private set
+        {
+            _blueCurrency = value;
+            EventBus.Invoke(new OnBlueCurrencyValueChanged(BlueCurrency));
+        }
+    }
 
     public void OnEnable()
     {
@@ -29,10 +73,10 @@ public class PlayerCurrency : MonoBehaviour, IEventListener, IEventPusher
     {
         switch (@event.CurrencyType)
         {
-            case CurrencyTypes.RedCurrency: _redCurrency++; break;
-            case CurrencyTypes.YellowCurrency: _yellowCurrency++; break;
-            case CurrencyTypes.GreenCurrency: _greenCurrency++; break;
-            case CurrencyTypes.BlueCurrency: _blueCurrency++; break;
+            case CurrencyTypes.RedCurrency: RedCurrency++; break;
+            case CurrencyTypes.YellowCurrency: YellowCurrency++; break;
+            case CurrencyTypes.GreenCurrency: GreenCurrency++; break;
+            case CurrencyTypes.BlueCurrency: BlueCurrency++; break;
             default: Debug.LogWarning("Unknown currency type"); break;
         }
     }
@@ -42,16 +86,16 @@ public class PlayerCurrency : MonoBehaviour, IEventListener, IEventPusher
         switch (type)
         {
             case CurrencyTypes.RedCurrency:
-                if (RedCurrency >= amount) { _redCurrency -= amount; return true; }
+                if (RedCurrency >= amount) { RedCurrency -= amount; return true; }
                 break;
             case CurrencyTypes.YellowCurrency:
-                if (YellowCurrency >= amount) { _yellowCurrency -= amount; return true; }
+                if (YellowCurrency >= amount) { YellowCurrency -= amount; return true; }
                 break;
             case CurrencyTypes.GreenCurrency:
-                if (GreenCurrency >= amount) { _greenCurrency -= amount; return true; }
+                if (GreenCurrency >= amount) { GreenCurrency -= amount; return true; }
                 break;
             case CurrencyTypes.BlueCurrency:
-                if (BlueCurrency >= amount) { _blueCurrency -= amount; return true; }
+                if (BlueCurrency >= amount) { BlueCurrency -= amount; return true; }
                 break;
         }
         return false;

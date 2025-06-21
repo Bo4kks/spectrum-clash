@@ -11,7 +11,7 @@ public class MaxHealthUpgrade : StatsUpgrade
         {
             { FloatStatType.MaxHealth, _healthBonusPerLevel }
         };
-
+        
         var intStats = new Dictionary<IntStatType, int>();
         var boolStats = new Dictionary<BoolStatType, bool>();
 

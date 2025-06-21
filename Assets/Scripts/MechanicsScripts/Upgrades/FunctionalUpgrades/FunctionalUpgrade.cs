@@ -8,10 +8,6 @@ public class FunctionalUpgrade : Upgrade, IUpgrade
 
     protected override void AddUpgrade()
     {
-        if (_featureObject != null && isUpgradePurchased)
-        {
-            _featureObject.SetActive(true);
-            isUpgradePurchased = true;
-        }
+        isUpgradePurchased = true;
     }
 }

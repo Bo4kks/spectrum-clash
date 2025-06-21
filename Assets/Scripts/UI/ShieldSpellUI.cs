@@ -4,10 +4,12 @@ public class ShieldSpellUI : MonoBehaviour, IEventListener
 {
     private CanvasGroup _shieldSpellCanvasGroup;
     private CanvasGroupSettings _canvasGroupSettings = new();
+    private Shield _shield;
 
     private void Awake()
     {
         _shieldSpellCanvasGroup = GetComponent<CanvasGroup>();
+        _shield = FindFirstObjectByType<Shield>();
     }
 
     public void OnEnable()
@@ -24,12 +26,20 @@ public class ShieldSpellUI : MonoBehaviour, IEventListener
 
     private void Show(OnGameRestartEvent @event)
     {
-        _canvasGroupSettings.SetCanvasGroupSettings(_shieldSpellCanvasGroup, true);
+        if (_shield.IsUpgradePurchased)
+        {
+            _canvasGroupSettings.SetCanvasGroupSettings(_shieldSpellCanvasGroup, true);
+        }
+
+        Debug.Log(_shield.IsUpgradePurchased);
     }
 
     private void Hide(OnGameOverEvent @event)
     {
-        _canvasGroupSettings.SetCanvasGroupSettings(_shieldSpellCanvasGroup, false);
+        if (_shield.IsUpgradePurchased)
+        {
+            _canvasGroupSettings.SetCanvasGroupSettings(_shieldSpellCanvasGroup, false);
+        }
     }
 
 }

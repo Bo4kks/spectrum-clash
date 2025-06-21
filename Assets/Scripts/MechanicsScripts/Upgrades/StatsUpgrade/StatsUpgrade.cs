@@ -5,7 +5,7 @@ public abstract class StatsUpgrade : MonoBehaviour, IStatsUpgrade
     [Header("Upgrade Settings")]
     [SerializeField] private int _maxLevel = 10;
     [SerializeField] private int _basePrice = 10;
-    [SerializeField] private int _currentLevel = 0;
+    [SerializeField] protected int _currentLevel = 0;
     [SerializeField] private CurrencyTypes _currencyType;
 
     private PlayerCurrency _playerCurrency;

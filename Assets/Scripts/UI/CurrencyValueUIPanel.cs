@@ -8,36 +8,25 @@ public class CurrencyValueUIPanel : MonoBehaviour, IEventListener
     [SerializeField] private TextMeshProUGUI _greenCurrencyValue;
     [SerializeField] private TextMeshProUGUI _blueCurrencyValue;
 
-    private PlayerCurrency _playerCurrency;
-
-    private void Awake()
-    {
-        _playerCurrency = FindFirstObjectByType<PlayerCurrency>();
-    }
-
     public void OnEnable()
     {
-        EventBus.Subscribe<OnPlayerEarnedCurrencyEvent>(UpdateCurrencyValue);
+        EventBus.Subscribe<OnRedCurrencyValueChanged>(UpdateRedCurrencyFields);
+        EventBus.Subscribe<OnYellowCurrencyValueChanged>(UpdateYellowCurrencyFields);
+        EventBus.Subscribe<OnGreenCurrencyValueChanged>(UpdateGreenValueFields);
+        EventBus.Subscribe<OnBlueCurrencyValueChanged>(UpdateBlueValueFields);
     }
 
     public void OnDisable()
     {
-        EventBus.Unsubscribe<OnPlayerEarnedCurrencyEvent>(UpdateCurrencyValue);
+        EventBus.Unsubscribe<OnRedCurrencyValueChanged>(UpdateRedCurrencyFields);
+        EventBus.Unsubscribe<OnYellowCurrencyValueChanged>(UpdateYellowCurrencyFields);
+        EventBus.Unsubscribe<OnGreenCurrencyValueChanged>(UpdateGreenValueFields);
+        EventBus.Unsubscribe<OnBlueCurrencyValueChanged>(UpdateBlueValueFields);
     }
 
-    public void UpdateCurrencyValue(OnPlayerEarnedCurrencyEvent @event)
-    {
-        _redCurrencyValue.text = _playerCurrency.RedCurrency.ToString();
-        _yellowCurrencyValue.text = _playerCurrency.YellowCurrency.ToString();
-        _greenCurrencyValue.text = _playerCurrency.GreenCurrency.ToString();
-        _blueCurrencyValue.text = _playerCurrency.BlueCurrency.ToString();
-    }
+    private void UpdateRedCurrencyFields(OnRedCurrencyValueChanged @event) => _redCurrencyValue.text = @event.RedCurrencyValue.ToString();
+    private void UpdateYellowCurrencyFields(OnYellowCurrencyValueChanged @event) => _yellowCurrencyValue.text = @event.YellowCurrencyValue.ToString();
+    private void UpdateGreenValueFields(OnGreenCurrencyValueChanged @event) => _greenCurrencyValue.text = @event.GreenCurrencyValue.ToString();
+    private void UpdateBlueValueFields(OnBlueCurrencyValueChanged @event) => _blueCurrencyValue.text = @event.BlueCurrencyValue.ToString();
 
-    public void UpdateCurrencyValue()
-    {
-        _redCurrencyValue.text = _playerCurrency.RedCurrency.ToString();
-        _yellowCurrencyValue.text = _playerCurrency.YellowCurrency.ToString();
-        _greenCurrencyValue.text = _playerCurrency.GreenCurrency.ToString();
-        _blueCurrencyValue.text = _playerCurrency.BlueCurrency.ToString();
-    }
 }

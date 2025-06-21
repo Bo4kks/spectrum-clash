@@ -86,11 +86,8 @@ public class UpgradePurchaseButtonUI : MonoBehaviour, IEventListener
         }
 
         // –азблокировка следующих кнопок, если они есть
-        bool hasUnlockedButtons = _unlockedButtons.Count > 0;
-        if (hasUnlockedButtons)
-        {
-            UnlockFollowingButtons();
-        }
+        UnlockFollowingButtons();
+        
     }
 
     private void TryFunctionalSimpleUpgrade(IUpgrade upgrade)
@@ -122,10 +119,15 @@ public class UpgradePurchaseButtonUI : MonoBehaviour, IEventListener
 
     private void UnlockFollowingButtons()
     {
-        foreach (var button in _unlockedButtons)
+        bool hasUnlockedButtons = _unlockedButtons.Count > 0;
+
+        if (hasUnlockedButtons)
         {
-            button.CanPurchase = true;
-            button.Button.interactable = button.HasEnoughCurrency();
+            foreach (var button in _unlockedButtons)
+            {
+                button.CanPurchase = true;
+                button.Button.interactable = button.HasEnoughCurrency();
+            }
         }
     }
 

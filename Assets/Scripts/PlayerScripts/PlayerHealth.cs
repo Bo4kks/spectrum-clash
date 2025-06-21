@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour, IEventListener, IEventPusher
 {
     [SerializeField] private float _currentHealth;
+    [SerializeField] private bool _canRegen = true;
 
     [Header("BugFix&Test")]
     [SerializeField] private bool _isCanDie = true;
@@ -45,6 +46,17 @@ public class PlayerHealth : MonoBehaviour, IEventListener, IEventPusher
         RefillHealth();
     }
 
+    private void Update()
+    {
+        if (_playerStats.GetBool(BoolStatType.IsHealthRegenEnabled) && _canRegen)
+        {
+            if (CurrentHealth < _playerStats.GetFloat(FloatStatType.MaxHealth))
+            {
+                CurrentHealth += _playerStats.GetFloat(FloatStatType.HealthRegenPerSecond) * Time.deltaTime;
+            }
+        }
+    }
+
     public void OnEnable()
     {
         EventBus.Subscribe<OnEnemyHitPlayerEvent>(TakeDamage);
@@ -64,7 +76,15 @@ public class PlayerHealth : MonoBehaviour, IEventListener, IEventPusher
 
     private void RefillHealth() => CurrentHealth = _playerStats.GetFloat(FloatStatType.MaxHealth);
 
-    private void GameOver() => EventBus.Invoke(new OnGameOverEvent());
+    private void GameOver()
+    {
+        EventBus.Invoke(new OnGameOverEvent());
+        _canRegen = false;
+    }
 
-    private void UpdateFields(OnGameRestartEvent @event) => RefillHealth();
+    private void UpdateFields(OnGameRestartEvent @event)
+    {
+        RefillHealth();
+        _canRegen = true;
+    }
 }

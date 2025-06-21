@@ -1420,6 +1420,7 @@ GameObject:
   - component: {fileID: 2851115333723173486}
   - component: {fileID: 5507887001312299673}
   - component: {fileID: 2205494670674661960}
+  - component: {fileID: 3870986514957410072}
   m_Layer: 5
   m_Name: UpgradeImage (2)
   m_TagString: Untagged
@@ -1530,6 +1531,24 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3870986514957410072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985658344230047505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d46901a3e0e70df41a4c1c5c2222c2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currencyType: 0
+  _basePrice: 120
+  _priceIncrementPerLevel: 120
+  _unlockedButtons: []
+  _upgradeComponent: {fileID: 0}
+  _canPurchase: 0
 --- !u!1 &1116785760858020200
 GameObject:
   m_ObjectHideFlags: 0
@@ -3614,8 +3633,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currencyType: 0
   _basePrice: 70
-  _priceIncrementPerLevel: 0
-  _unlockedButtons: []
+  _priceIncrementPerLevel: 70
+  _unlockedButtons:
+  - {fileID: 3870986514957410072}
+  - {fileID: 0}
   _upgradeComponent: {fileID: 0}
   _canPurchase: 0
 --- !u!1 &2834783780248813257
@@ -4792,9 +4813,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currencyType: 0
-  _basePrice: 0
+  _basePrice: 50
   _priceIncrementPerLevel: 0
-  _unlockedButtons: []
+  _unlockedButtons:
+  - {fileID: 8124367200535925934}
   _upgradeComponent: {fileID: 0}
   _canPurchase: 1
 --- !u!1 &3569267458466789007
