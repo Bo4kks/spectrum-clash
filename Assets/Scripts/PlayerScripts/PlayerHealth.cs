@@ -71,7 +71,12 @@ public class PlayerHealth : MonoBehaviour, IEventListener, IEventPusher
 
     private void TakeDamage(OnEnemyHitPlayerEvent @event)
     {
-        CurrentHealth -= @event.Damage;
+        float finalDamage = @event.Damage - _playerStats.GetInt(IntStatType.Armor);
+
+        if (finalDamage > 0)
+        {
+            CurrentHealth -= finalDamage;
+        }
     }
 
     private void RefillHealth() => CurrentHealth = _playerStats.GetFloat(FloatStatType.MaxHealth);

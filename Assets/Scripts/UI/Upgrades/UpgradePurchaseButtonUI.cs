@@ -19,7 +19,13 @@ public class UpgradePurchaseButtonUI : MonoBehaviour, IEventListener
     [Header("Availability")]
     [SerializeField] private bool _canPurchase;
 
-    private TextMeshProUGUI _priceText;
+    [Header("UI texts")]
+    [SerializeField] private TextMeshProUGUI _upgradelvlText;
+    [SerializeField] private TextMeshProUGUI _priceText;
+
+    [Header("Icon")]
+    [SerializeField] private Image _costIcon;
+
     private PlayerCurrency _currency;
 
     public Button Button { get; private set; }
@@ -29,7 +35,6 @@ public class UpgradePurchaseButtonUI : MonoBehaviour, IEventListener
     {
         Button = GetComponent<Button>();
         _currency = FindFirstObjectByType<PlayerCurrency>();
-        _priceText = GetComponentInChildren<TextMeshProUGUI>();
 
         UpdatePriceText();
     }
@@ -78,6 +83,7 @@ public class UpgradePurchaseButtonUI : MonoBehaviour, IEventListener
             return;
 
         UpdatePriceText();
+        UpdateLvlText();
 
         // Блокировка кнопки, если достигнут максимальный уровень
         if (upgrade.CurrentLevel >= upgrade.MaxLevel)
@@ -100,6 +106,7 @@ public class UpgradePurchaseButtonUI : MonoBehaviour, IEventListener
 
         // Активация апгрейда
         upgrade.ActivateUpgrade();
+        UpdateLvlText();
 
         // Деактивация текущей кнопки
         Button.interactable = false;
@@ -113,6 +120,14 @@ public class UpgradePurchaseButtonUI : MonoBehaviour, IEventListener
     {
         if (CanPurchase && HasEnoughCurrency())
         {
+            if (_upgradeComponent is IStatsUpgrade scalableUpgrade)
+            {
+                if (scalableUpgrade.CurrentLevel == scalableUpgrade.MaxLevel)
+                {
+                    return;
+                }
+            }
+
             Button.interactable = true;
         }
     }
@@ -157,6 +172,28 @@ public class UpgradePurchaseButtonUI : MonoBehaviour, IEventListener
             : _basePrice;
 
         return current >= required;
+    }
+
+    private void UpdateLvlText()
+    {
+        if (_upgradeComponent is IStatsUpgrade scalableUpgrade)
+        {
+            if (scalableUpgrade.CurrentLevel == scalableUpgrade.MaxLevel)
+            {
+                _upgradelvlText.text = "MAX";
+                _costIcon.color = new Color(0, 0, 0, 0);
+                _priceText.text = "MAXED";
+                return;
+            }
+
+            _upgradelvlText.text = scalableUpgrade.CurrentLevel.ToString();
+        }
+        else if (_upgradeComponent is IUpgrade simpleUpgrade)
+        {
+            _upgradelvlText.text = "MAX";
+            _costIcon.color = new Color(0, 0, 0, 0);
+            _priceText.text = "MAXED";
+        }
     }
 
     private int GetCurrentCurrency()

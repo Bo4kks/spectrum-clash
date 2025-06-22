@@ -1686,6 +1686,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d3157371a2a79a42a6e2806cc765aa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &236113021 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9181751960469005825, guid: 543b6fd66a1d9554aa8510e37317955d, type: 3}
+  m_PrefabInstance: {fileID: 7937903726574375953}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &237189726
 GameObject:
   m_ObjectHideFlags: 0
@@ -2777,7 +2788,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 51009d50f3d54864e903058caa7909e5, type: 2}
   - {fileID: 11400000, guid: 1a12879c6c3f72345ad8a4f024e89138, type: 2}
   _enemyPool: {fileID: 312345257}
-  _spawnInterval: 1.2
+  _spawnInterval: 0.3
 --- !u!4 &386362556
 Transform:
   m_ObjectHideFlags: 0
@@ -4766,6 +4777,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &691683167 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 349596507114104005, guid: 543b6fd66a1d9554aa8510e37317955d, type: 3}
+  m_PrefabInstance: {fileID: 7937903726574375953}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &691683172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691683167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d46901a3e0e70df41a4c1c5c2222c2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currencyType: 0
+  _basePrice: 50
+  _priceIncrementPerLevel: 50
+  _unlockedButtons: []
+  _upgradeComponent: {fileID: 1029523801}
+  _canPurchase: 0
+  _upgradelvlText: {fileID: 809440672}
+  _priceText: {fileID: 236113021}
+  _costIcon: {fileID: 901555203}
 --- !u!1 &698422165
 GameObject:
   m_ObjectHideFlags: 0
@@ -5422,6 +5459,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 807119696}
   m_CullTransparentMesh: 1
+--- !u!114 &809440672 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8192297466708282072, guid: 543b6fd66a1d9554aa8510e37317955d, type: 3}
+  m_PrefabInstance: {fileID: 7937903726574375953}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &861208416
 GameObject:
   m_ObjectHideFlags: 0
@@ -5837,6 +5885,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &901555203 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8156082423352280723, guid: 543b6fd66a1d9554aa8510e37317955d, type: 3}
+  m_PrefabInstance: {fileID: 7937903726574375953}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &909610972
 GameObject:
   m_ObjectHideFlags: 0
@@ -6206,6 +6265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentHealth: 0
+  _canRegen: 1
   _isCanDie: 1
 --- !u!114 &915640508
 MonoBehaviour:
@@ -6323,9 +6383,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f872014e23a15b449827f176925ef8b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 1
+  _maxHealth: 100
   _maxEnergy: 100
   _energyRegenPerSecond: 1
+  _healtRegenPerSecond: 0
   _isHealthRegenEnabled: 0
   _armor: 0
 --- !u!114 &915640512
@@ -6340,7 +6401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a58fde0e54a95429af7b909c0a32ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _redCurrency: 1000
+  _redCurrency: 9999
   _yellowCurrency: 0
   _greenCurrency: 0
   _blueCurrency: 0
@@ -7190,6 +7251,55 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1029523800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1029523802}
+  - component: {fileID: 1029523801}
+  m_Layer: 0
+  m_Name: DefenseUpgrade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1029523801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029523800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40fc742aa8000dc4dbbb6985971d3945, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxLevel: 10
+  _basePrice: 50
+  _currentLevel: 0
+  _currencyType: 0
+  _defenseBonusPerLevel: 2
+--- !u!4 &1029523802
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029523800}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1253286223}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1031633958
 GameObject:
   m_ObjectHideFlags: 0
@@ -9219,6 +9329,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1634119749}
+  - {fileID: 2048819217}
+  - {fileID: 1029523802}
   m_Father: {fileID: 150557516}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1254988264
@@ -10909,17 +11021,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1570983130 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8124367200535925934, guid: 543b6fd66a1d9554aa8510e37317955d, type: 3}
-  m_PrefabInstance: {fileID: 7937903726574375953}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d46901a3e0e70df41a4c1c5c2222c2c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1574236568
 GameObject:
   m_ObjectHideFlags: 0
@@ -13954,6 +14055,56 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2048819215
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2048819217}
+  - component: {fileID: 2048819216}
+  m_Layer: 0
+  m_Name: HealthRegenUpgrade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2048819216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048819215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbaaa1368f3082548a00458bb619cb78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxLevel: 10
+  _basePrice: 120
+  _currentLevel: 0
+  _currencyType: 0
+  _isHealthRegenActive: 1
+  _heatlhRegenPerSecond: 0.25
+--- !u!4 &2048819217
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048819215}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1253286223}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2054189411
 GameObject:
   m_ObjectHideFlags: 0
@@ -15299,21 +15450,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2976017541956064450, guid: 543b6fd66a1d9554aa8510e37317955d, type: 3}
-      propertyPath: _basePrice
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2976017541956064450, guid: 543b6fd66a1d9554aa8510e37317955d, type: 3}
       propertyPath: _upgradeComponent
       value: 
       objectReference: {fileID: 862126919}
-    - target: {fileID: 2976017541956064450, guid: 543b6fd66a1d9554aa8510e37317955d, type: 3}
-      propertyPath: _unlockedButtons.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2976017541956064450, guid: 543b6fd66a1d9554aa8510e37317955d, type: 3}
-      propertyPath: '_unlockedButtons.Array.data[0]'
-      value: 
-      objectReference: {fileID: 1570983130}
     - target: {fileID: 3554318935715668493, guid: 543b6fd66a1d9554aa8510e37317955d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -15326,6 +15465,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3870986514957410072, guid: 543b6fd66a1d9554aa8510e37317955d, type: 3}
+      propertyPath: _upgradeComponent
+      value: 
+      objectReference: {fileID: 2048819216}
+    - target: {fileID: 3870986514957410072, guid: 543b6fd66a1d9554aa8510e37317955d, type: 3}
+      propertyPath: _unlockedButtons.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3870986514957410072, guid: 543b6fd66a1d9554aa8510e37317955d, type: 3}
+      propertyPath: '_unlockedButtons.Array.data[0]'
+      value: 
+      objectReference: {fileID: 691683172}
     - target: {fileID: 3921248707241280926, guid: 543b6fd66a1d9554aa8510e37317955d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -15742,10 +15893,6 @@ PrefabInstance:
       propertyPath: _upgradeComponent
       value: 
       objectReference: {fileID: 1634119748}
-    - target: {fileID: 8124367200535925934, guid: 543b6fd66a1d9554aa8510e37317955d, type: 3}
-      propertyPath: _priceIncrementPerLevel
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8269924872589054286, guid: 543b6fd66a1d9554aa8510e37317955d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -15873,7 +16020,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 349596507114104005, guid: 543b6fd66a1d9554aa8510e37317955d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 691683172}
   m_SourcePrefab: {fileID: 100100000, guid: 543b6fd66a1d9554aa8510e37317955d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
