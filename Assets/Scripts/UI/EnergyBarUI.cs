@@ -7,10 +7,12 @@ public class EnergyBarUI : MonoBehaviour, IEventListener
 
     private CanvasGroup _energyBarCanvas;
     private CanvasGroupSettings _canvasGroupSettings = new();
+    private PlayerStats _playerStats;
 
     private void Awake()
     {
         _energyBarCanvas = GetComponent<CanvasGroup>();
+        _playerStats = FindFirstObjectByType<PlayerStats>();
     }
 
     public void OnEnable()
@@ -31,7 +33,7 @@ public class EnergyBarUI : MonoBehaviour, IEventListener
     {
         float currentEnergy = @event.EnergyValue;
 
-        _energyBar.fillAmount = currentEnergy / 100f;
+        _energyBar.fillAmount = currentEnergy / _playerStats.GetFloat(FloatStatType.MaxEnergy);
     }
 
     private void HideEnergyBar(OnPlayerGoToUpgradesShop @event)

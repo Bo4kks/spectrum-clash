@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public class OnStatsUpgradeEvent
+public struct OnStatsUpgradeEvent
 {
     public Dictionary<FloatStatType, float> FloatStats { get; }
     public Dictionary<IntStatType, int> IntStats { get; }
